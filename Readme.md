@@ -4,18 +4,18 @@ News Module
 Installation
 ------------
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+Предполагаются два метода установки расширения
 
-Either run
+1. Запустите в консоли
 
 ```
 php composer.phar require --prefer-dist garmayev/yii2-news "*"
 ```
 
-or add
+2. Добавьте в файл `composer.json` следующую строку:
 
 ```
 "garmayev/yii2-news": "*"
 ```
 
-to the require section of your `composer.json` file.
+Запустите обновление репозиториев `composer update` в консоли
