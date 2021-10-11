@@ -18,16 +18,13 @@ class Bootstrap implements \yii\base\BootstrapInterface
 		/**
 		 * @var $module Module
 		 */
-		if ( $app->hasModule('news') && ($module = $app->getModule('news') instanceof Module) ) {
+		if ( $app->hasModule('news') && (($module = $app->getModule('news')) instanceof Module) ) {
 			$configUrlRule = [
 				'prefix' => $module->urlPrefix,
 				'rules'  => $module->urlRules,
 			];
 
-			if ($module->urlPrefix != 'user') {
-				$configUrlRule['routePrefix'] = 'user';
-			}
-
+			$configUrlRule['routePrefix'] = $module->urlPrefix;
 			$configUrlRule['class'] = 'yii\web\GroupUrlRule';
 			$rule = Yii::createObject($configUrlRule);
 

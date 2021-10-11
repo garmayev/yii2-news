@@ -4,14 +4,16 @@ namespace garmayev\news;
 
 /**
  * post module definition class
+ *
+ * @property $urlPrefix string
  */
 class Module extends \yii\base\Module
 {
 	public $user_class;
 
 	public $urlRules = [
-		'/' => 'main/index',
-		'<action:\w+>' => 'main/<action>',
+		'' => 'post/index',
+		'<action:\w+>' => 'post/<action>',
 		'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 		'<id:\d+>-<slug:\S+>' => 'post/view',
 		'tag/<slug:\S+>' => 'tag/view',
@@ -35,5 +37,9 @@ class Module extends \yii\base\Module
 	    if ( is_null($this->user_class) ) {
 		    $this->user_class = "common\models\User";
 	    }
+
+		if ( is_null($this->urlPrefix) ) {
+			$this->urlPrefix = "news";
+		}
     }
 }

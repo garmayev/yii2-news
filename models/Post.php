@@ -43,7 +43,7 @@ class Post extends \yii\db\ActiveRecord
             [['created_at', 'updated_at', 'author_id', 'location_id'], 'integer'],
             [['title', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => $module->params['user_class'], 'targetAttribute' => ['author_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => $module->user_class, 'targetAttribute' => ['author_id' => 'id']],
             [['location_id'], 'exist', 'skipOnError' => true, 'targetClass' => Location::className(), 'targetAttribute' => ['location_id' => 'id']],
         ];
     }
