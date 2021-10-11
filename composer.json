@@ -24,7 +24,8 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": "^2.0.13",
-    "yiisoft/yii2-bootstrap": "^2.0.0"
+    "yiisoft/yii2-bootstrap": "^2.0.0",
+    "vova07/yii2-imperavi-widget": "*"
   },
   "autoload": {
     "psr-4": {
@@ -32,6 +33,6 @@
     }
   },
   "extra": {
-    "bootstrap": "garmayev\\news\\Bootstrap",
+    "bootstrap": "garmayev\\news\\Bootstrap"
   }
 }

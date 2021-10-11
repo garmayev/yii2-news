@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Yii2 Support">
+    <option name="yiiRootPath" value="/var/www/diary" />
+    <option name="viewPathMap">
+      <map>
+        <entry key="@app/themes/*/modules" value="@app/modules" />
+        <entry key="@app/themes/*/widgets" value="@app/widgets" />
+        <entry key="@app/themes/*" value="@app/runtime/tmp-extensions/yii2-*/src/views" />
+      </map>
+    </option>
+    <option name="migrateCommands">
+      <list>
+        <MigrateCommand>
+          <option name="isDefault" value="true" />
+          <option name="command" value="migrate" />
+          <option name="migrationTable" value="{{%migration}}" />
+          <option name="db" value="db" />
+          <option name="migrationPath">
+            <list>
+              <option value="@app/migrations" />
+            </list>
+          </option>
+        </MigrateCommand>
+      </list>
+    </option>
+    <option name="aliasMap">
+      <map>
+        <entry key="@webroot" value="@app/web" />
+        <entry key="@vendor" value="vendor" />
+        <entry key="@runtime" value="@app/runtime" />
+        <entry key="@console" value="console" />
+        <entry key="@common" value="common" />
+        <entry key="@yii2support-console-command-app-root" value="@console" />
+        <entry key="@frontend" value="frontend" />
+        <entry key="@backend" value="backend" />
+      </map>
+    </option>
+  </component>
+</project>

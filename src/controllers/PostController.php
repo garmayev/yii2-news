@@ -4,7 +4,6 @@ namespace garmayev\news\controllers;
 
 use garmayev\news\models\Post;
 use garmayev\news\models\search\PostSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -16,7 +15,7 @@ class PostController extends DefaultController
     /**
      * @inheritDoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),
