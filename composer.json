@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "garmayev\\news\\": ""
+      "garmayev\\news\\": "src"
     }
   },
   "extra": {
