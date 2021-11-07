@@ -22,15 +22,67 @@ use yii\widgets\ActiveForm;
 				'fullscreen',
 			],
 		],
-
 	]) ?>
 
-    <!--    --><? //= $form->field($model, 'location_id')->textInput() ?>
+    <?php
+        echo "<div class='form-group'>";
+        echo Html::textInput("Post[tags][]", "", ["list" => "post-tags", "multiple" => true, "class" => "form-control"]);
+        echo Html::beginTag("datalist", ["id" => "post-tags", "size" => 20]);
+        foreach (\garmayev\news\models\Tag::find()->all() as $tag) {
+            echo Html::tag("option", $tag->title, ["value" => $tag->title]);
+        }
+        echo Html::endTag("datalist");
+        echo "</div>";
+    ?>
 
     <div class="form-group">
 		<?= Html::submitButton(Yii::t('news', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?php
+            if ( $model->isNewRecord ) {
+	            echo Html::a(Yii::t("news", "Cancel"), ["post/index"], ["class" => ["btn", "btn-danger"]]);
+            } else {
+	            echo Html::a(Yii::t("news", "Delete"), ["post/delete", "id" => $model->id], ["class" => ["btn", "btn-danger"]]);
+            }
+        ?>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let datalist = jQuery('datalist');
+            let options = jQuery('datalist option');
+            let optionsarray = jQuery.map(options ,function(option) {
+                return option.value;
+            });
+            let input = jQuery('input[list]');
+            let inputcommas = (input.val().match(/,/g)||[]).length;
+            let separator = ',';
 
+            function filldatalist(prefix) {
+                if (input.val().indexOf(separator) > -1 && options.length > 0) {
+                    datalist.empty();
+                    for (i=0; i < optionsarray.length; i++ ) {
+                        if (prefix.indexOf(optionsarray[i]) < 0 ) {
+                            datalist.append('<option value="'+prefix+optionsarray[i]+'">');
+                        }
+                    }
+                }
+            }
+            input.bind("change paste keyup",function() {
+                let inputtrim = input.val().replace(/^\s+|\s+$/g, "");
+                //console.log(inputtrim);
+                let currentcommas = (input.val().match(/,/g)||[]).length;
+                //console.log(currentcommas);
+                if (inputtrim != input.val()) {
+                    if (inputcommas != currentcommas) {
+                        let lsIndex = inputtrim.lastIndexOf(separator);
+                        let str = (lsIndex != -1) ? inputtrim.substr(0, lsIndex)+", " : "";
+                        filldatalist(str);
+                        inputcommas = currentcommas;
+                    }
+                    input.val(inputtrim);
+                }
+            });
+        })
+    </script>
 	<?php ActiveForm::end(); ?>
 
 </div>

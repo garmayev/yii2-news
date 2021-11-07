@@ -4,32 +4,93 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4dae75dcb613b5148d77c2da3a08f117
+class ComposerStaticInit4d3cb99966d947b587408f27bcbf89c3
 {
     public static $prefixLengthsPsr4 = array (
+        'y' => 
+        array (
+            'yii\\composer\\' => 13,
+            'yii\\' => 4,
+        ),
+        'v' => 
+        array (
+            'vova07\\imperavi\\tests\\' => 22,
+            'vova07\\imperavi\\' => 16,
+        ),
+        'l' => 
+        array (
+            'lhs\\Yii2SaveRelationsBehavior\\' => 30,
+        ),
         'g' => 
         array (
             'garmayev\\news\\' => 14,
         ),
+        'c' => 
+        array (
+            'cebe\\markdown\\' => 14,
+        ),
+        'P' => 
+        array (
+            'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'yii\\composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-composer',
+        ),
+        'yii\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'vova07\\imperavi\\tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vova07/yii2-imperavi-widget/tests',
+        ),
+        'vova07\\imperavi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vova07/yii2-imperavi-widget/src',
+        ),
+        'lhs\\Yii2SaveRelationsBehavior\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/la-haute-societe/yii2-save-relations-behavior/src',
+        ),
         'garmayev\\news\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',
+        ),
+        'cebe\\markdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Yii' => __DIR__ . '/..' . '/yiisoft/yii2/Yii.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4dae75dcb613b5148d77c2da3a08f117::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4dae75dcb613b5148d77c2da3a08f117::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4dae75dcb613b5148d77c2da3a08f117::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4d3cb99966d947b587408f27bcbf89c3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4d3cb99966d947b587408f27bcbf89c3::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit4d3cb99966d947b587408f27bcbf89c3::$classMap;
 
         }, null, ClassLoader::class);
     }

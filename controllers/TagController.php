@@ -52,10 +52,11 @@ class TagController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
+//		var_dump($slug); die;
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel(["slug" => $slug]),
         ]);
     }
 
@@ -118,13 +119,13 @@ class TagController extends Controller
     /**
      * Finds the Tag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
+     * @param mixed $mixed
      * @return Tag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($mixed)
     {
-        if (($model = Tag::findOne($id)) !== null) {
+        if (($model = Tag::findOne($mixed)) !== null) {
             return $model;
         }
 

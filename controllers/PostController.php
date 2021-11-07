@@ -4,8 +4,10 @@ namespace garmayev\news\controllers;
 
 use garmayev\news\models\Post;
 use garmayev\news\models\search\PostSearch;
+use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -15,22 +17,20 @@ class PostController extends DefaultController
     /**
      * @inheritDoc
      */
-    public function behaviors(): array
+    public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
+        return [];
     }
 
-    /**
+	public function beforeAction($action)
+	{
+		if ( $action === "create" ) {
+			$this->enableCsrfValidation = false;
+		}
+//		return parent::beforeAction($action);
+	}
+
+	/**
      * Lists all Post models.
      * @return mixed
      */
@@ -51,10 +51,10 @@ class PostController extends DefaultController
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel(["slug" => $slug]),
         ]);
     }
 
@@ -66,10 +66,12 @@ class PostController extends DefaultController
     public function actionCreate()
     {
         $model = new Post();
-
-        if ($this->request->isPost) {
+        if (Yii::$app->request->isPost) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return ["ok" => true];
+            } else {
+				return ["ok" => false, "message" => $model->getErrorSummary(true)];
             }
         } else {
             $model->loadDefaultValues();
@@ -87,12 +89,12 @@ class PostController extends DefaultController
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel(["slug" => $slug]);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['post/index']);
         }
 
         return $this->render('update', [
@@ -117,13 +119,13 @@ class PostController extends DefaultController
     /**
      * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
+     * @param mixed $mixed
      * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($mixed)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = Post::findOne($mixed)) !== null) {
             return $model;
         }
 

@@ -11,14 +11,15 @@ use garmayev\news\models\Post;
  */
 class PostSearch extends Post
 {
+	public $search;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at', 'author_id', 'location_id'], 'integer'],
-            [['title', 'content', 'slug'], 'safe'],
+			[['search'], 'safe'],
         ];
     }
 
@@ -31,7 +32,14 @@ class PostSearch extends Post
         return Model::scenarios();
     }
 
-    /**
+	public function attributeLabels()
+	{
+		return [
+			"Search" => \Yii::t("news", "Search")
+		];
+	}
+
+	/**
      * Creates data provider instance with search query applied
      *
      * @param array $params
@@ -65,10 +73,11 @@ class PostSearch extends Post
             'location_id' => $this->location_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'slug', $this->slug]);
+        $query->andFilterWhere(['like', 'title', $this->search])
+            ->orFilterWhere(['like', 'content', $this->search])
+            ->orFilterWhere(['like', 'slug', $this->search]);
 
+		$query->orderBy(["created_at" => SORT_DESC]);
         return $dataProvider;
     }
 }

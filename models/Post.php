@@ -3,7 +3,10 @@
 namespace garmayev\news\models;
 
 use common\models\User;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "post".
@@ -32,7 +35,23 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
-    /**
+	public function behaviors()
+	{
+		return array_merge(parent::behaviors(), [
+			'timestamp' => [
+				'class' => TimestampBehavior::class,
+				'createdAtAttribute' => 'created_at',
+				'updatedAtAttribute' => 'updated_at'
+			],
+			'sluggable' => [
+				'class' => SluggableBehavior::class,
+				'attribute' => 'title',
+				'ensureUnique' => true,
+			],
+		]);
+	}
+
+	/**
      * {@inheritdoc}
      */
     public function rules()
@@ -45,6 +64,7 @@ class Post extends \yii\db\ActiveRecord
             [['slug'], 'unique'],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => $module->user_class, 'targetAttribute' => ['author_id' => 'id']],
             [['location_id'], 'exist', 'skipOnError' => true, 'targetClass' => Location::className(), 'targetAttribute' => ['location_id' => 'id']],
+	        [['author_id'], 'default', 'value' => Yii::$app->user->id],
         ];
     }
 
@@ -65,7 +85,13 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
+	public function beforeSave($insert)
+	{
+		print_r($insert);
+		return parent::beforeSave($insert);
+	}
+
+	/**
      * Gets query for [[Author]].
      *
      * @return \yii\db\ActiveQuery
@@ -95,11 +121,12 @@ class Post extends \yii\db\ActiveRecord
         return $this->hasMany(PostTag::className(), ['post_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Tags]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
+	/**
+	 * Gets query for [[Tags]].
+	 *
+	 * @return \yii\db\ActiveQuery
+	 * @throws \yii\base\InvalidConfigException
+	 */
     public function getTags()
     {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->viaTable('post_tag', ['post_id' => 'id']);

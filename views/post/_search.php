@@ -18,21 +18,7 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'content') ?>
-
-    <?= $form->field($model, 'slug') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'author_id') ?>
-
-    <?php // echo $form->field($model, 'location_id') ?>
+    <?= $form->field($model, 'search')->textInput(["placeholder" => Yii::t("news", "Search")])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('news', 'Search'), ['class' => 'btn btn-primary']) ?>

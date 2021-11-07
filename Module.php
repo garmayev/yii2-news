@@ -4,8 +4,6 @@ namespace garmayev\news;
 
 /**
  * post module definition class
- *
- * @property $urlPrefix string
  */
 class Module extends \yii\base\Module
 {
@@ -13,11 +11,11 @@ class Module extends \yii\base\Module
 
 	public $urlRules = [
 		'' => 'post/index',
-		'<action:\w+>' => 'post/<action>',
-		'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-		'<id:\d+>-<slug:\S+>' => 'post/view',
+		'post/delete' => 'post/delete',
+		'post/create' => 'post/create',
 		'tag/<slug:\S+>' => 'tag/view',
 		'date/<date:\S+>' => 'date/view',
+		'post/<slug:\S+>' => 'post/update',
 	];
 
 	public $urlPrefix = 'news';
@@ -28,6 +26,8 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'garmayev\news\controllers';
 
     /**
+     * Initialize first settings
+     *
      * {@inheritdoc}
      */
     public function init()
@@ -38,8 +38,6 @@ class Module extends \yii\base\Module
 		    $this->user_class = "common\models\User";
 	    }
 
-		if ( is_null($this->urlPrefix) ) {
-			$this->urlPrefix = "news";
-		}
+//		\Yii::$app->bootstrap[] = Bootstrap::class;
     }
 }

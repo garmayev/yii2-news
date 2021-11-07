@@ -6,5 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'yii\\composer\\' => array($vendorDir . '/yiisoft/yii2-composer'),
+    'yii\\' => array($vendorDir . '/yiisoft/yii2'),
+    'vova07\\imperavi\\tests\\' => array($vendorDir . '/vova07/yii2-imperavi-widget/tests'),
+    'vova07\\imperavi\\' => array($vendorDir . '/vova07/yii2-imperavi-widget/src'),
+    'lhs\\Yii2SaveRelationsBehavior\\' => array($vendorDir . '/la-haute-societe/yii2-save-relations-behavior/src'),
     'garmayev\\news\\' => array($baseDir . '/'),
+    'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
 );

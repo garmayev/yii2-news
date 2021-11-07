@@ -9,6 +9,7 @@
   ],
   "type": "yii2-extension",
   "license": "MIT",
+  "version": "1.0",
   "support": {
     "issues": "https://github.com/garmayev/yii2-news/issues?state=open",
     "source": "https://github.com/garmayev/yii2-news"
@@ -20,11 +21,15 @@
       "homepage": "https://garmayev.ru"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
       "garmayev\\news\\": ""
     }
+  },
+  "require": {
+    "vova07/yii2-imperavi-widget": "*",
+    "la-haute-societe/yii2-save-relations-behavior": "*"
   },
   "extra": {
     "bootstrap": "garmayev\\news\\Bootstrap"
