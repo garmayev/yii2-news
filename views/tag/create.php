@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model garmayev\news\models\Tag */
 
-$this->title = Yii::t('news', 'Create Tag');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('news', 'Tags'), 'url' => ['index']];
+$this->title = Yii::t('news', 'New tag');
+$this->params["breadcrumbs"][] = ["label" => Yii::t("news", "Posts"), "url" => ['post/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-create">

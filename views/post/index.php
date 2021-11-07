@@ -20,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<?php
-	echo Html::a(Yii::t("app", "New post"), ["/news/post/create"], ["class" => ["btn", "btn-success"]]);
+	echo Html::a(Yii::t("news", "New post"), ["/news/post/create"], ["class" => ["btn", "btn-success"]]);
+	echo Html::a(Yii::t("news", "New tag"), ["/news/tag/create"], ["class" => ["btn", "btn-success"]]);
 	echo Html::tag("hr");
 	$currentMonth = 0;
 	foreach ($dataProvider->getModels() as $post) {

@@ -4,6 +4,7 @@ namespace garmayev\news\controllers;
 
 use garmayev\news\models\Tag;
 use garmayev\news\models\search\TagSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -54,7 +55,6 @@ class TagController extends Controller
      */
     public function actionView($slug)
     {
-//		var_dump($slug); die;
         return $this->render('view', [
             'model' => $this->findModel(["slug" => $slug]),
         ]);

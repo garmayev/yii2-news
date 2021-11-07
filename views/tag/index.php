@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('news', 'Tags');
+$this->params["breadcrumbs"][] = Yii::t("news", "Posts");
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-index">
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('news', 'Create Tag'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('news', 'New tag'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

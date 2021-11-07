@@ -24,10 +24,11 @@ class PostController extends DefaultController
 
 	public function beforeAction($action)
 	{
-		if ( $action === "create" ) {
+//		var_dump($action); die;
+		if ( $action->id == "create" ) {
 			$this->enableCsrfValidation = false;
 		}
-//		return parent::beforeAction($action);
+		return parent::beforeAction($action);
 	}
 
 	/**
@@ -67,11 +68,10 @@ class PostController extends DefaultController
     {
         $model = new Post();
         if (Yii::$app->request->isPost) {
-			Yii::$app->response->format = Response::FORMAT_JSON;
             if ($model->load($this->request->post()) && $model->save()) {
-                return ["ok" => true];
+				return $this->redirect(["post/index"]);
             } else {
-				return ["ok" => false, "message" => $model->getErrorSummary(true)];
+				Yii::error($model->getErrorSummary(true));
             }
         } else {
             $model->loadDefaultValues();

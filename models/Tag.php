@@ -3,6 +3,7 @@
 namespace garmayev\news\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "tag".
@@ -24,7 +25,18 @@ class Tag extends \yii\db\ActiveRecord
         return 'tag';
     }
 
-    /**
+	public function behaviors()
+	{
+		return [
+			'sluggable' => [
+				'class' => SluggableBehavior::class,
+				'attribute' => 'title',
+				'ensureUnique' => true,
+			]
+		];
+	}
+
+	/**
      * {@inheritdoc}
      */
     public function rules()

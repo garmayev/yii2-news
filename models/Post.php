@@ -35,6 +35,10 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
+	/**
+	 * {@inheritdoc}
+	 * @return array
+	 */
 	public function behaviors()
 	{
 		return array_merge(parent::behaviors(), [
@@ -48,6 +52,12 @@ class Post extends \yii\db\ActiveRecord
 				'attribute' => 'title',
 				'ensureUnique' => true,
 			],
+			'relations' => [
+				'class' => SaveRelationsBehavior::class,
+				'relations' => [
+					'tags'
+				],
+			]
 		]);
 	}
 
@@ -85,10 +95,32 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
-	public function beforeSave($insert)
+	public function transactions()
 	{
-		print_r($insert);
-		return parent::beforeSave($insert);
+		return [
+			self::SCENARIO_DEFAULT => self::OP_ALL,
+		];
+	}
+
+	public function load($data, $formName = null)
+	{
+		$ids = [];
+		if ( isset($data["Post"]["tags"]) ) {
+			foreach ($data["Post"]["tags"] as $tag) {
+				$id = intval($tag);
+				if ( $id === 0 ) {
+					$newTag = new Tag([
+						'title' => $tag
+					]);
+					$newTag->save();
+					$ids[] = $newTag->id;
+				} else {
+					$ids[] = $id;
+				}
+			}
+			$this->tags = $ids;
+		}
+		return parent::load($data, $formName);
 	}
 
 	/**

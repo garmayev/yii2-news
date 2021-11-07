@@ -13,6 +13,7 @@ class Module extends \yii\base\Module
 		'' => 'post/index',
 		'post/delete' => 'post/delete',
 		'post/create' => 'post/create',
+		'tag/create' => 'tag/create',
 		'tag/<slug:\S+>' => 'tag/view',
 		'date/<date:\S+>' => 'date/view',
 		'post/<slug:\S+>' => 'post/update',
