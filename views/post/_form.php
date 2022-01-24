@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 			'tokenSeparators' => [',', ' '],
 			"multiple" => true,
 		]
-	]); ?>
+	])->label(Yii::t("news", "Tags")); ?>
 
     <div class="form-group">
 		<?= Html::submitButton(Yii::t('news', 'Save'), ['class' => 'btn btn-success']) ?>

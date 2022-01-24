@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model garmayev\news\models\Post */
 
-$this->title = Yii::t('news', 'Create Post');
+$this->title = Yii::t('news', 'New post');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('news', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

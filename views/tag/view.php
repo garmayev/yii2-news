@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('news', 'Posts'), 'url' => ['post/index']];
-$this->params['breadcrumbs'][] = Yii::t("news", "Tag").": $this->title";
+$this->params['breadcrumbs'][] = Yii::t("news", "Tag") . ": $this->title";
 \yii\web\YiiAsset::register($this);
 $searchModel = new garmayev\news\models\search\PostSearch();
 ?>
@@ -18,10 +18,8 @@ $searchModel = new garmayev\news\models\search\PostSearch();
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-	<?php Pjax::begin(); ?>
-<!--	--><?php //echo $this->render('_search', ['model' => $searchModel]); ?>
-
 	<?php
+	Pjax::begin();
 	echo Html::a(Yii::t("news", "New post"), ["/news/post/create"], ["class" => ["btn", "btn-success"]]);
 	echo Html::a(Yii::t("news", "New tag"), ["/news/post/create"], ["class" => ["btn", "btn-success"]]);
 	echo Html::tag("hr");
